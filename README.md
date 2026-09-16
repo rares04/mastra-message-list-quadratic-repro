@@ -18,13 +18,13 @@ Loading N stored messages into a `MessageList` should cost roughly O(N): the tim
 Time grows with N²; the "ns per message pair" column stays flat while wall time explodes.
 
 ```
-N= 1000  add(rows)     28 ms  one add per row     30 ms  (28.5 ns per message pair)
-N= 2000  add(rows)     82 ms  one add per row     85 ms  (20.5 ns per message pair)
-N= 4000  add(rows)    301 ms  one add per row    310 ms  (18.8 ns per message pair)
-N= 8000  add(rows)   1410 ms  one add per row   1440 ms  (22.0 ns per message pair)
+N= 1000  add(rows)     28 ms  one add per row     28 ms  (27.9 ns per message pair)
+N= 2000  add(rows)     79 ms  one add per row     74 ms  (19.7 ns per message pair)
+N= 4000  add(rows)    289 ms  one add per row    289 ms  (18.1 ns per message pair)
+N= 8000  add(rows)   1193 ms  one add per row   1168 ms  (18.6 ns per message pair)
 ```
 
-(Apple M-series laptop, Node 22; see `bench.mjs`. Real rows with several parts cost more
+(Apple M4 Pro, Node 24.15; see `bench.mjs`. `@mastra/core`'s own test suite on Node 22 shows the same curve: 20 000 rows take ~24 s. Real rows with several parts cost more
 per pair — a production thread of ~10 000 rows measured 14–25 s in a wall-clock profile.)
 
 ## Steps to reproduce
@@ -41,4 +41,4 @@ memory and calls `new MessageList().add(rows, 'memory')`.
 ## Environment
 
 - `@mastra/core` 1.67.0 (also present in 1.59.0)
-- Node 22.x, npm 10.x, macOS 15
+- Node 24.15.0, npm 11.12.1, macOS 26.6 (arm64)
