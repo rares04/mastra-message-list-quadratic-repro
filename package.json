@@ -1,0 +1,9 @@
+{
+  "name": "mastra-message-list-quadratic-repro",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "description": "Minimal reproduction: MessageList.add(messages, 'memory') is quadratic in the number of stored messages",
+  "scripts": { "bench": "node bench.mjs" },
+  "dependencies": { "@mastra/core": "1.67.0" }
+}
